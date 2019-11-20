@@ -11,6 +11,7 @@ public class ItemFaturaComIcms extends ItemFatura {
 
 	@Override
 	public double getSubTotal() {
-		return Math.floor(super.getSubTotal() * (1 + taxaIcms) * 100) / 100;
+		double precoComIcms = getProduto().getPreco() * (1 + taxaIcms);
+		return (Math.floor(precoComIcms  * 100) / 100) * getQuantidade();
 	}
 }
