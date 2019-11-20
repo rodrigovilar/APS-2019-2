@@ -4,7 +4,6 @@ public class ItemFatura {
 
 	private Produto produto;
 	private int quantidade;
-	private double subTotal;
 
 	public ItemFatura(Produto produto, int quantidade) {
 		this.produto = produto;
@@ -27,12 +26,8 @@ public class ItemFatura {
 		this.quantidade = quantidade;
 	}
 
-	public void setSubTotal(double subTotal) {
-		this.subTotal = subTotal;
-	}
-
 	public double getSubTotal() {
-		return subTotal;
+		return Math.floor(produto.getPreco() * quantidade * 100) / 100 ;
 	}
 
 }
