@@ -9,37 +9,28 @@ public class FaturaSimples {
 	protected List<ItemFatura> itens = new ArrayList<ItemFatura>();
 
 	public void addItem(Produto produto, int quantidade) {
-		ItemFatura itemFatura = criarItemFatura(produto, quantidade);
+		ItemFatura itemFatura = criarItemFatura(itens.size() + 1, produto, quantidade);
 		itens.add(itemFatura);
 	}
 
-	protected ItemFatura criarItemFatura(Produto produto, int quantidade) {
-		return new ItemFatura(produto, quantidade);
+	protected ItemFatura criarItemFatura(int sequencia, Produto produto, int quantidade) {
+		return new ItemFatura(sequencia, produto, quantidade);
 	}
 
 	@Override
 	public String toString() {
-		String esperado = "";
-		int i = 1;
+		String resultado = "";
 		double total = 0.0;
 		
-		for (ItemFatura item : itens) {
-			Produto produto = item.getProduto();
-			
-			String preco = String.format("%.2f", produto.getPreco());
-			String subTotal = String.format("%.2f", item.getSubTotal());
-			
-			String linha = i++ + ". " + produto.getNome() + 
-					" " + preco + " x " + 
-					item.getQuantidade() + " : " + subTotal + "\n";
-			
-			esperado += linha;
+		for (int i = 0; i < itens.size(); i++) {
+			ItemFatura item = itens.get(i);
+			resultado += item;
 			total += item.getSubTotal();
 		}
 		
-		esperado += 
+		resultado += 
 				"Total : " + String.format("%.2f", total);
 		
-		return esperado;
+		return resultado;
 	}
 }

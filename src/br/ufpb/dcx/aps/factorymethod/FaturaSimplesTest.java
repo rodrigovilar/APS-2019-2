@@ -11,13 +11,7 @@ class FaturaSimplesTest {
 		
 		FaturaSimples faturaSimples1 = new FaturaSimples();
 		
-		Produto arroz = new Produto("Arroz", 0.50);
-		Produto batata = new Produto("Batata", 0.75);
-		Produto sal = new Produto("Sal", 2.00);
-		
-		faturaSimples1.addItem(arroz, 2);
-		faturaSimples1.addItem(batata, 3);
-		faturaSimples1.addItem(sal, 1);
+		montarCenarioComTresItens(faturaSimples1);
 		
 		String esperado = 
 				"1. Arroz 0.50 x 2 : 1.00\n" +
@@ -34,13 +28,7 @@ class FaturaSimplesTest {
 		
 		FaturaSimples faturaComIcms1 = new FaturaComIcms(0.10);
 		
-		Produto arroz = new Produto("Arroz", 0.50);
-		Produto batata = new Produto("Batata", 0.75);
-		Produto sal = new Produto("Sal", 2.00);
-		
-		faturaComIcms1.addItem(arroz, 2);
-		faturaComIcms1.addItem(batata, 3);
-		faturaComIcms1.addItem(sal, 1);
+		montarCenarioComTresItens(faturaComIcms1);
 		
 		String esperado = 
 				"1. Arroz (0.50 + 0.05) x 2 : 1.10\n" +
@@ -49,6 +37,17 @@ class FaturaSimplesTest {
 				"Total : 5.76";
 		
 		assertEquals(esperado, faturaComIcms1.toString());
+	}
+
+
+	private void montarCenarioComTresItens(FaturaSimples fatura) {
+		Produto arroz = new Produto("Arroz", 0.50);
+		Produto batata = new Produto("Batata", 0.75);
+		Produto sal = new Produto("Sal", 2.00);
+		
+		fatura.addItem(arroz, 2);
+		fatura.addItem(batata, 3);
+		fatura.addItem(sal, 1);
 	}
 
 }
